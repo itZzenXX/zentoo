@@ -136,7 +136,11 @@ multilib_src_configure() {
 			einfo "SSL provided by nss"
 			myconf+=( --with-nss )
 		fi
-		if use openssl || use curl_ssl_openssl || use curl_ssl_libressl; then
+		if use libressl || use curl_ssl_libressl ; then
+			einfo "SSL provided by libressl"
+			myconf+=( --with-libressl )
+		fi
+		if use openssl || use curl_ssl_openssl ; then
 			einfo "SSL provided by openssl"
 			myconf+=( --with-ssl --with-ca-path="${EPREFIX}"/etc/ssl/certs )
 		fi
@@ -150,7 +154,7 @@ multilib_src_configure() {
 			myconf+=( --with-default-ssl-backend=gnutls )
 		elif use curl_ssl_libressl; then
 			einfo "Default SSL provided by LibreSSL"
-			myconf+=( --with-default-ssl-backend=openssl )  # NOTE THE HACK HERE
+			myconf+=( --with-default-ssl-backend=libressl ) 
 		elif use curl_ssl_mbedtls; then
 			einfo "Default SSL provided by mbedtls"
 			myconf+=( --with-default-ssl-backend=mbedtls )
