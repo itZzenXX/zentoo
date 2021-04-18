@@ -136,7 +136,7 @@ multilib_src_configure() {
 			einfo "SSL provided by nss"
 			myconf+=( --with-nss )
 		fi
-		if use librressl || use curl_ssl_libressl; then
+		if use libressl || use curl_ssl_libressl; then
 			einfo "SSL provided by libressll"
 			myconf+=( --with-ssl --with-ca-path="${EPREFIX}"/etc/ssl/certs )
 		fi
