@@ -24,10 +24,10 @@ REQUIRED_USE="
 	threads? ( !adns )
 	ssl? (
 		^^ (
-			curl_ssl_libressl
 			curl_ssl_gnutls
 			curl_ssl_mbedtls
 			curl_ssl_nss
+			curl_ssl_libressl
 			curl_ssl_openssl
 			curl_ssl_winssl
 		)
@@ -50,6 +50,9 @@ RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 		)
 		openssl? (
 			dev-libs/openssl:0=[sslv3=,static-libs?,${MULTILIB_USEDEP}]
+		)
+		libressl? (
+			dev-libs/libressl:0=[${MULTILIB_USEDEP}]
 		)
 		nss? (
 			dev-libs/nss:0[${MULTILIB_USEDEP}]
@@ -135,6 +138,10 @@ multilib_src_configure() {
 			einfo "SSL provided by nss"
 			myconf+=( --with-nss )
 		fi
+		if use libressl || use curl_ssl_libressl ; then
+			einfo "SSL provided by LibreSSL"
+			myconf+=( --with-libressl )
+		fi
 		if use openssl || use curl_ssl_openssl; then
 			einfo "SSL provided by openssl"
 			myconf+=( --with-ssl --with-ca-path="${EPREFIX}"/etc/ssl/certs )
@@ -153,6 +160,9 @@ multilib_src_configure() {
 		elif use curl_ssl_nss; then
 			einfo "Default SSL provided by nss"
 			myconf+=( --with-default-ssl-backend=nss )
+		elif use curl_ssl_libressl ; then
+			einfo "Default SSL provided by LibreSSL"
+			myconf+=( --with-default-ssl-backend=libressl )
 		elif use curl_ssl_openssl; then
 			einfo "Default SSL provided by openssl"
 			myconf+=( --with-default-ssl-backend=openssl )
