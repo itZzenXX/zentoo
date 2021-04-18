@@ -150,7 +150,7 @@ multilib_src_configure() {
 			myconf+=( --with-default-ssl-backend=gnutls )
 		elif use curl_ssl_libressl; then
 			einfo "Default SSL provided by LibreSSL"
-			myconf+=( --with-default-ssl-backend=openssl )  # NOTE THE HACK HERE
+			myconf+=( --with-default-ssl-backend=libressl )  # NOTE THE HACK HERE
 		elif use curl_ssl_mbedtls; then
 			einfo "Default SSL provided by mbedtls"
 			myconf+=( --with-default-ssl-backend=mbedtls )
