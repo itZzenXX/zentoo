@@ -136,11 +136,7 @@ multilib_src_configure() {
 			einfo "SSL provided by nss"
 			myconf+=( --with-nss )
 		fi
-		if use libressl || use curl_ssl_libressl ; then
-			einfo "SSL provided by libressl"
-			myconf+=( --with-libressl )
-		fi
-		if use openssl || use curl_ssl_openssl ; then
+		if use openssl || use curl_ssl_openssl || use curl_ssl_libressl; then
 			einfo "SSL provided by openssl"
 			myconf+=( --with-ssl --with-ca-path="${EPREFIX}"/etc/ssl/certs )
 		fi
@@ -154,7 +150,7 @@ multilib_src_configure() {
 			myconf+=( --with-default-ssl-backend=gnutls )
 		elif use curl_ssl_libressl; then
 			einfo "Default SSL provided by LibreSSL"
-			myconf+=( --with-default-ssl-backend=libressl ) 
+			myconf+=( --with-default-ssl-backend=openssl )  # NOTE THE HACK HERE
 		elif use curl_ssl_mbedtls; then
 			einfo "Default SSL provided by mbedtls"
 			myconf+=( --with-default-ssl-backend=mbedtls )
@@ -289,7 +285,8 @@ multilib_src_configure() {
 }
 
 multilib_src_install_all() {
-	einstalldocs
+	default
 	find "${ED}" -type f -name '*.la' -delete
 	rm -rf "${ED}"/etc/
 }
+
