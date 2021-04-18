@@ -6,7 +6,7 @@ inherit savedconfig toolchain-funcs
 
 DESCRIPTION="a dynamic window manager for X11"
 HOMEPAGE="https://github.com/itZzenXX/zendwm"
-SRC_URI="https://github.com/itZzenXX/zendwm/releases/download/6.2/dwm-6.2.tar.gz/${PN}/${P}.tar.gz"
+SRC_URI="https://github.com/itZzenXX/zendwm/releases/download/6.2/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
