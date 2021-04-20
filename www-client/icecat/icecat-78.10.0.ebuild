@@ -82,7 +82,6 @@ BDEPEND="${PYTHON_DEPS}
 	)"
 
 CDEPEND="
-	buildtarball? ( ~www-client/makeicecat-"${PV}"[buildtarball] )
 	>=dev-libs/nss-3.53.1
 	>=dev-libs/nspr-4.25
 	dev-libs/atk
