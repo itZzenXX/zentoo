@@ -21,7 +21,6 @@ RESTRICT="buildtarball? ( network-sandbox )"
 RDEPEND="${BDEPEND}"
 BDEPEND="
 	dev-vcs/mercurial
-	dev-perl/File-Rename
 "
 
 S=""${WORKDIR}"/gnuzilla-"${COMMIT}""
